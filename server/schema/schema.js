@@ -9,6 +9,7 @@ const {
     GraphQLSchema,
     GraphQLList,
     GraphQLNonNull,
+    GraphQLEnumType,
 } = require("graphql");
 
 // Client Type
@@ -100,10 +101,83 @@ const mutation = new GraphQLObjectType({
         deleteClient: {
             type: ClientType,
             args: {
-                id: { type: GraphQLNonNull(GraphQLString) },
+                id: { type: GraphQLNonNull(GraphQLID) },
             },
             async resolve(_parent, args) {
                 return await Client.findByIdAndDelete(args.id);
+            },
+        },
+        // Add a project
+        addProject: {
+            type: ProjectType,
+            args: {
+                name: { type: GraphQLNonNull(GraphQLString) },
+                description: { type: GraphQLNonNull(GraphQLString) },
+                status: {
+                    type: new GraphQLEnumType({
+                        name: "ProjectStatus",
+                        values: {
+                            new: { value: "Not Started" },
+                            progress: { value: "In Progress" },
+                            completed: { value: "Completed" },
+                        },
+                    }),
+                    defaultValue: "Not Started",
+                },
+                clientId: { type: GraphQLNonNull(GraphQLID) },
+            },
+            async resolve(_parent, args) {
+                const project = new Project({
+                    name: args.name,
+                    description: args.description,
+                    status: args.status,
+                    clientId: args.clientId,
+                });
+
+                return await project.save();
+            },
+        },
+        updateProject: {
+            type: ProjectType,
+            args: {
+                id: { type: GraphQLNonNull(GraphQLID) },
+                name: { type: GraphQLNonNull(GraphQLString) },
+                description: { type: GraphQLNonNull(GraphQLString) },
+                status: {
+                    type: new GraphQLEnumType({
+                        // This value has to be unique or it will throw an error
+                        name: "ProjectStatusUpdate",
+                        values: {
+                            new: { value: "Not Started" },
+                            progress: { value: "In Progress" },
+                            completed: { value: "Completed" },
+                        },
+                    }),
+                },
+            },
+            async resolve(_parent, args) {
+                return await Project.findByIdAndUpdate(
+                    args.id,
+                    {
+                        $set: {
+                            name: args.name,
+                            description: args.description,
+                            status: args.status,
+                        },
+                    },
+                    // If it is not there, it will create a new project
+                    { new: true }
+                );
+            },
+        },
+        // Delete a project
+        deleteProject: {
+            type: ProjectType,
+            args: {
+                id: { type: GraphQLNonNull(GraphQLID) },
+            },
+            async resolve(_parent, args) {
+                return await Project.findByIdAndDelete(args.id);
             },
         },
     },
