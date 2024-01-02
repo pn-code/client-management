@@ -1,13 +1,8 @@
-import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
+import { ApolloProvider } from "@apollo/client";
 
+import client from "./config/client";
 import Header from "./components/Header";
 import Clients from "./components/Clients";
-
-const client = new ApolloClient({
-    // Setting up Apollo Client with our server's GraphQL endpoint
-    uri: "http://localhost:5000/graphql",
-    cache: new InMemoryCache(),
-});
 
 function App() {
     return (

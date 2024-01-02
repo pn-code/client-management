@@ -13,3 +13,15 @@ h1 {
 .btn--danger {
     @apply bg-red-500 text-white;
 }
+
+.spinner {
+    @apply border-l-4 border-t-4 rounded-full w-10 h-10 animate-spin border-blue-700;
+}
+
+.full-screen {
+    @apply min-h-[calc(100vh-120px)] w-full;
+}
+
+.center {
+    @apply flex justify-center items-center;
+}

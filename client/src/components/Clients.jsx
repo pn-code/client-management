@@ -1,27 +1,19 @@
-import { gql, useQuery } from "@apollo/client";
-import ClientRow from "./ClientRow";
+import { useQuery } from "@apollo/client";
 
-// Create a GQL query with `gql` term
-const GET_CLIENTS = gql`
-    query {
-        clients {
-            id
-            name
-            email
-            phone
-        }
-    }
-`;
+import { GET_CLIENTS } from "../queries/clientQuery";
+import ClientRow from "./ClientRow";
+import Spinner from "./Spinner";
 
 export default function Clients() {
     // To use the query to fetch data, utilize the `useQuery` function to call the query
     const { loading, error, data } = useQuery(GET_CLIENTS);
 
-    if (loading) return <p>Loading...</p>;
-    if (error) return <p>Something went wrong</p>;
+    if (loading) return <Spinner />;
+    if (error)
+        return <p className="full-screen center">Something went wrong</p>;
 
     return (
-        <>
+        <div className="p-2 w-full h-full">
             {!loading && !error && (
                 <table>
                     <thead>
@@ -39,6 +31,6 @@ export default function Clients() {
                     </tbody>
                 </table>
             )}
-        </>
+        </div>
     );
 }
