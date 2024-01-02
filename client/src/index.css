@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+h1 {
+    @apply text-xl font-bold;
+}
+
+.btn {
+    @apply px-3 py-1.5;
+}
+
+.btn--danger {
+    @apply bg-red-500 text-white;
+}
