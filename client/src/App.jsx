@@ -4,6 +4,8 @@ import client from "./config/client";
 import Header from "./components/Header";
 import Clients from "./components/Clients";
 import AddClientModal from "./components/AddClientModal";
+import AddProjectModal from "./components/AddProjectModal";
+import Projects from "./components/Projects";
 
 function App() {
     return (
@@ -12,7 +14,12 @@ function App() {
             <ApolloProvider client={client}>
                 <Header />
                 <main className="p-2">
-                    <AddClientModal />
+                    <div className="flex gap-2">
+                        <AddClientModal />
+                        <AddProjectModal />
+                    </div>
+                    
+                    <Projects />
                     <Clients />
                 </main>
             </ApolloProvider>

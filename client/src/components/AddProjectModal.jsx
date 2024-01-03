@@ -1,30 +1,11 @@
 import { useState } from "react";
-import { FaUser } from "react-icons/fa";
+import { FaBacon } from "react-icons/fa";
 import { useMutation } from "@apollo/client";
 
-import { ADD_CLIENT } from "../mutations/clientMutations";
-import { GET_CLIENTS } from "../queries/clientQuery";
-
-export default function AddClientModal() {
+export default function AddProjectModal() {
     const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
-    const [phone, setPhone] = useState("");
+    const [status, setStatus] = useState("");
     const [isOpen, setIsOpen] = useState(false);
-
-    const [addClient] = useMutation(ADD_CLIENT, {
-        variables: { name, email, phone },
-        update(cache, { data: { addClient } }) {
-            // Get clients from existing query
-            const { clients } = cache.readQuery({
-                query: GET_CLIENTS,
-            });
-
-            cache.writeQuery({
-                query: GET_CLIENTS,
-                data: { clients: [...clients, addClient] },
-            });
-        },
-    });
 
     const handleOpen = () => {
         setIsOpen((prev) => !prev);
@@ -32,16 +13,6 @@ export default function AddClientModal() {
 
     const handleOnSubmit = async (e) => {
         e.preventDefault();
-
-        if (name === "" || email === "" || phone === "") {
-            return alert("All fields must be filled.");
-        }
-
-        addClient(name, email, phone);
-        setIsOpen((prev) => !prev);
-        setName("");
-        setEmail("");
-        setPhone("");
     };
 
     return (
@@ -50,8 +21,8 @@ export default function AddClientModal() {
                 onClick={handleOpen}
                 className="btn btn--primary flex gap-2 items-center"
             >
-                <FaUser />
-                <div>Add Client</div>
+                <FaBacon />
+                <div>Add Project</div>
             </button>
 
             {isOpen && (
@@ -61,7 +32,7 @@ export default function AddClientModal() {
                         className="flex flex-col gap-2"
                     >
                         <h2 className="text-2xl text-blue-600 font-bold">
-                            Add New Client
+                            Add New Project
                         </h2>
                         <div className="flex flex-col gap-1 text-white font-semibold">
                             <label htmlFor="name">Name: </label>
@@ -73,23 +44,15 @@ export default function AddClientModal() {
                             />
                         </div>
                         <div className="flex flex-col gap-1 text-white font-semibold">
-                            <label htmlFor="email">Email: </label>
+                            <label htmlFor="email">Status: </label>
                             <input
-                                type="email"
-                                id="email"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
+                                type="status"
+                                id="status"
+                                value={status}
+                                onChange={(e) => setStatus(e.target.value)}
                             />
                         </div>
-                        <div className="flex flex-col gap-1 text-white font-semibold">
-                            <label htmlFor="name">Phone: </label>
-                            <input
-                                type="text"
-                                id="phone"
-                                value={phone}
-                                onChange={(e) => setPhone(e.target.value)}
-                            />
-                        </div>
+
                         <div className="flex mt-2 gap-4">
                             <button
                                 type="button"
