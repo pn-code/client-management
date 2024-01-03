@@ -7,6 +7,7 @@ import "./index.css";
 import Root from "./routes/Root.jsx";
 import ErrorPage from "./routes/Error.jsx";
 import NotFound from "./routes/NotFound.jsx";
+import Project from "./routes/Project.jsx";
 
 const router = createBrowserRouter([
     {
@@ -17,6 +18,10 @@ const router = createBrowserRouter([
             {
                 path: "",
                 element: <Home />,
+            },
+            {
+                path: "/project/:id",
+                element: <Project />,
             },
             {
                 path: "*",

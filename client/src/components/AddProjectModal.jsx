@@ -5,6 +5,7 @@ import { useMutation } from "@apollo/client";
 export default function AddProjectModal() {
     const [name, setName] = useState("");
     const [status, setStatus] = useState("");
+    const [client, setClient] = useState("");
     const [isOpen, setIsOpen] = useState(false);
 
     const handleOpen = () => {
@@ -34,6 +35,7 @@ export default function AddProjectModal() {
                         <h2 className="text-2xl text-blue-600 font-bold">
                             Add New Project
                         </h2>
+
                         <div className="flex flex-col gap-1 text-white font-semibold">
                             <label htmlFor="name">Name: </label>
                             <input
@@ -43,8 +45,23 @@ export default function AddProjectModal() {
                                 onChange={(e) => setName(e.target.value)}
                             />
                         </div>
+
                         <div className="flex flex-col gap-1 text-white font-semibold">
                             <label htmlFor="email">Status: </label>
+
+                            <select
+                                id="status"
+                                value={status}
+                                onChange={(e) => setStatus(e.target.value)}
+                            >
+                                <option value="new">Not Started</option>
+                                <option value="progress">In Progress</option>
+                                <option value="completed">Completed</option>
+                            </select>
+                        </div>
+
+                        <div className="flex flex-col gap-1 text-white font-semibold">
+                            <label htmlFor="email">Client: </label>
                             <input
                                 type="status"
                                 id="status"

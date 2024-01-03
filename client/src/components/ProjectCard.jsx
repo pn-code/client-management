@@ -1,8 +1,7 @@
-import { useMutation } from "@apollo/client";
-import { FaTrash } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 // import { DELETE_PROJECT } from "../mutations/projectMutations";
-import { GET_PROJECTS } from "../queries/projectQuery";
+// import { GET_PROJECTS } from "../queries/projectQuery";
 
 export default function ProjectCard({ project }) {
     // const [deleteProject] = useMutation(DELETE_PROJECT, {
@@ -29,7 +28,7 @@ export default function ProjectCard({ project }) {
                 <p className="text-slate-600 text-sm">Status: {project.status}</p>
             </header>
 
-            <button className="btn btn--primary h-9">View</button>
+            <Link to={`/project/${project.id}`} className="btn btn--primary h-9">View</Link>
         </div>
     );
 }
