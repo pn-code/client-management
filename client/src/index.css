@@ -7,11 +7,19 @@ h1 {
 }
 
 .btn {
-    @apply px-3 py-1.5;
+    @apply px-3 py-1.5 rounded-md duration-100;
+}
+
+.btn--primary {
+    @apply bg-blue-600 text-white hover:bg-blue-700;
+}
+
+.btn--secondary {
+    @apply bg-gray-600 text-white hover:bg-gray-700;
 }
 
 .btn--danger {
-    @apply bg-red-500 text-white;
+    @apply bg-red-500 text-white hover:bg-red-600;
 }
 
 .spinner {
