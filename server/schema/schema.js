@@ -104,6 +104,9 @@ const mutation = new GraphQLObjectType({
                 id: { type: GraphQLNonNull(GraphQLID) },
             },
             async resolve(_parent, args) {
+                // Cascade delete client projects
+                await Project.deleteMany({ clientId: args.id });
+
                 return await Client.findByIdAndDelete(args.id);
             },
         },
@@ -177,7 +180,7 @@ const mutation = new GraphQLObjectType({
                 id: { type: GraphQLNonNull(GraphQLID) },
             },
             async resolve(_parent, args) {
-                console.log(args)
+                console.log(args);
                 return await Project.findByIdAndDelete(args.id);
             },
         },
