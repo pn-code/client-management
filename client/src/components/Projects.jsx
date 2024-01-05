@@ -18,7 +18,7 @@ export default function Projects() {
         <div>
             <h2>Projects</h2>
             {data.projects.length > 0 ? (
-                <div className="w-full h-full flex flex-wrap">
+                <div className="w-full h-full flex flex-wrap gap-2">
                     {data.projects.map((project) => (
                         <ProjectCard project={project} key={project.id} />
                     ))}

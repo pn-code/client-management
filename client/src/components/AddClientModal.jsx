@@ -58,39 +58,42 @@ export default function AddClientModal() {
                 <div className="w-full h-screen absolute top-0 left-0 center bg-black/90">
                     <form
                         onSubmit={handleOnSubmit}
-                        className="flex flex-col gap-2"
+                        className="flex flex-col gap-2 bg-slate-50 w-full sm:max-w-[300px] py-4 px-8 rounded-md"
                     >
-                        <h2 className="text-2xl text-blue-600 font-bold">
+                        <h2 className="text-2xl font-bold border-b-2 border-slate-300">
                             Add New Client
                         </h2>
-                        <div className="flex flex-col gap-1 text-white font-semibold">
+                        <div className="flex flex-col gap-1 font-semibold">
                             <label htmlFor="name">Name: </label>
                             <input
                                 type="text"
                                 id="name"
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
+                                placeholder="Client Name"
                             />
                         </div>
-                        <div className="flex flex-col gap-1 text-white font-semibold">
+                        <div className="flex flex-col gap-1 font-semibold">
                             <label htmlFor="email">Email: </label>
                             <input
                                 type="email"
                                 id="email"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
+                                placeholder="Client Email"
                             />
                         </div>
-                        <div className="flex flex-col gap-1 text-white font-semibold">
+                        <div className="flex flex-col gap-1 font-semibold">
                             <label htmlFor="name">Phone: </label>
                             <input
                                 type="text"
                                 id="phone"
                                 value={phone}
                                 onChange={(e) => setPhone(e.target.value)}
+                                placeholder="Client Phone Number"
                             />
                         </div>
-                        <div className="flex mt-2 gap-4">
+                        <div className="flex mt-5 gap-4">
                             <button
                                 type="button"
                                 onClick={handleOpen}

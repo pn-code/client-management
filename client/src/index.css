@@ -14,8 +14,10 @@ p {
     @apply text-slate-600;
 }
 
-input, select {
-    @apply px-2 py-1 rounded-sm text-black outline outline-2 outline-gray-400;
+input,
+select,
+textarea {
+    @apply px-2 py-1 rounded-sm text-black outline outline-2 outline-gray-400 focus:outline-blue-400 font-normal;
 }
 
 .btn {
@@ -27,7 +29,7 @@ input, select {
 }
 
 .btn--secondary {
-    @apply bg-gray-600 text-white hover:bg-gray-700;
+    @apply bg-gray-500 text-white hover:bg-gray-600;
 }
 
 .btn--danger {
